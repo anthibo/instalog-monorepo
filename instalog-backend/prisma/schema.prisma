@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  group       String
+  actor       Actor    @relation(fields: [actor_id], references: [id])
+  actor_id    String
+  action      Action   @relation(fields: [actionId], references: [id])
+  action_id   String
+  target_id   String
+  target_name String
+  location    String
+  occurred_at DateTime @default(now())
+  metadata    Json?
+  actionId    String
+}
+
+model Actor {
+  id     String  @id @default(uuid())
+  email   String
+  events Event[]
+}
+
+model Action {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  events Event[]
+}
