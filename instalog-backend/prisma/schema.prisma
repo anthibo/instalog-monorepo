@@ -13,20 +13,21 @@ model Event {
   group       String
   actor       Actor    @relation(fields: [actor_id], references: [id])
   actor_id    String
-  action      Action   @relation(fields: [actionId], references: [id])
+  action      Action   @relation(fields: [action_id], references: [id])
   action_id   String
   target_id   String
   target_name String
   location    String
   occurred_at DateTime @default(now())
   metadata    Json?
-  actionId    String
 }
 
 model Actor {
-  id     String  @id @default(uuid())
-  email   String
-  events Event[]
+  id              String  @id @default(uuid())
+  email           String
+  name            String
+  hashed_password String
+  events          Event[]
 }
 
 model Action {
