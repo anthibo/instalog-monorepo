@@ -1,13 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EventsModule } from './events/events.module';
-import { ActionsModule } from './actions/actions.module';
-import { ActorsModule } from './actors/actors.module';
+import { EventsModule } from './modules/events/events.module';
+import { ActionsModule } from './modules/actions/actions.module';
+import { ActorsModule } from './modules/actors/actors.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import configurations from './config/configurations';
+import { configurationsSchemaValidation } from './config/configurations.schema';
 
 @Module({
-  imports: [EventsModule, ActionsModule, ActorsModule],
-  controllers: [AppController],
+  imports: [
+    ConfigModule.forRoot({
+      load: [configurations],
+      validationSchema: configurationsSchemaValidation,
+    }),
+    EventsModule,
+    ActionsModule,
+    ActorsModule,
+    AuthModule,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

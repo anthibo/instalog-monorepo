@@ -24,9 +24,10 @@ model Event {
 
 model Actor {
   id              String  @id @default(uuid())
-  email           String
+  email           String @unique
   name            String
   hashed_password String
+  sdk_secret_key  String?
   events          Event[]
 }
 

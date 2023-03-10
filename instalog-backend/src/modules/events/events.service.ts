@@ -6,7 +6,7 @@ import { CreateEventDto } from './events.dto';
 export class EventsService {
   constructor(private readonly prismaService: PrismaService) {}
   async createEvent(createEventData: CreateEventDto) {
-    const createdEvent = await this.prismaService.event.create({data: {}})
+    // const createdEvent = await this.prismaService.event.create({data: {}})
   }
   async listEvents() {
     return await this.prismaService.event.findMany();
