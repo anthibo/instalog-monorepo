@@ -9,7 +9,6 @@ datasource db {
 
 model Event {
   id          String   @id @default(uuid())
-  name        String
   group       String
   actor       Actor    @relation(fields: [actor_id], references: [id])
   actor_id    String

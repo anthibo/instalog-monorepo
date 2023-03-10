@@ -1,10 +1,6 @@
-import { IsIP, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsIP, IsNotEmpty } from 'class-validator';
 
 export class CreateEventDto {
-  @IsUUID()
-  @IsNotEmpty()
-  actor_id: string;
-
   @IsNotEmpty()
   group: string;
 
@@ -21,5 +17,5 @@ export class CreateEventDto {
   @IsNotEmpty()
   location: string;
 
-  metadata: any;
+  metadata?: any;
 }

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EventsModule } from './modules/events/events.module';
-import { ActionsModule } from './modules/actions/actions.module';
 import { ActorsModule } from './modules/actors/actors.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
@@ -15,7 +14,6 @@ import { configurationsSchemaValidation } from './config/configurations.schema';
       validationSchema: configurationsSchemaValidation,
     }),
     EventsModule,
-    ActionsModule,
     ActorsModule,
     AuthModule,
   ],
