@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { HashService } from './services/hash.service';
+import { HashService } from './hash.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

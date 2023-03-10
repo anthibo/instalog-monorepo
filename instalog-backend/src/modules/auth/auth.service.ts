@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ActorsService } from '../actors/actors.service';
-import { HashService } from '../utils/services/hash.service';
+import { HashService } from '../utils/hash.service';
 import { JwtService } from '@nestjs/jwt';
 import { Actor } from '@prisma/client';
 import { RegisterActorDto } from './auth.dto';
