@@ -16,7 +16,6 @@ export default function EventTableTemplate() {
                     <EventsTableRows />
                 </tbody>
             </table>
-            <button>Load more</button>
         </div>
     )
 }

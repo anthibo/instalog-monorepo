@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import ActorAvatar from '@/components/atoms/ActorAvatar/ActorAvatar'
@@ -9,6 +11,8 @@ type EventRowProps = {
 // TODO: FORMAT DATE
 // TODO: Show event details on hover
 export default function EventRow({ event }: EventRowProps) {
+    console.log('event rendered')
+    console.log(event)
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <td className="px-6 py-4 font-medium text-gray-900">
