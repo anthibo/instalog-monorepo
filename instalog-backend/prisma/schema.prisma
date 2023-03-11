@@ -17,7 +17,7 @@ model Event {
   target_id   String
   target_name String
   location    String
-  occurred_at DateTime @default(now())
+  occurred_at DateTime  @unique @default(now())
   metadata    Json?
 }
 

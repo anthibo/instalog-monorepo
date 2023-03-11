@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
-import { CreateEventDto } from './events.dto';
+import { CreateEventDto, EventQueryParamsDto } from './events.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('events')
@@ -17,8 +25,8 @@ export class EventsController {
     return createdEventResponse;
   }
   @Get('/')
-  async listEvents() {
-    const events = await this.eventsService.listEvents();
+  async listEvents(@Query() query: EventQueryParamsDto) {
+    const events = await this.eventsService.listEvents(query);
     return { events };
   }
 }

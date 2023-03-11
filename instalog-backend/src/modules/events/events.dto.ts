@@ -1,4 +1,5 @@
-import { IsIP, IsNotEmpty } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsIP, IsNotEmpty, IsNumber, Min } from 'class-validator';
 
 export class CreateEventDto {
   @IsNotEmpty()
@@ -18,4 +19,22 @@ export class CreateEventDto {
   location: string;
 
   metadata?: any;
+}
+
+export class EventQueryParamsDto {
+  @IsNotEmpty()
+  @Transform(({ value }) => Number(value))
+  @Min(1)
+  @IsNumber()
+  batchSize: number;
+
+  actor_id?: string;
+
+  action_id?: string;
+
+  action_name?: string;
+
+  target_id?: string;
+
+  occurred_after?: string;
 }
