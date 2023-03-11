@@ -29,7 +29,8 @@ export class EventsService {
     });
     return {
       events,
-      last_occurred_at: events.length > 0 ? events[0].occurred_at : null,
+      last_occurred_at:
+        events.length > 0 ? events[events.length - 1].occurred_at : null,
     };
   }
 
@@ -109,7 +110,7 @@ class EventQueryBuilder {
 
   occurred_after(occurred_after: string) {
     if (occurred_after) {
-      this.returnedQuery['cursor']['occurred_at'] = occurred_after;
+      this.returnedQuery['cursor'] = { occurred_at: occurred_after };
       this.returnedQuery['skip'] = 1;
     }
     return this;

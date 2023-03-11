@@ -26,7 +26,7 @@ export class EventsController {
   }
   @Get('/')
   async listEvents(@Query() query: EventQueryParamsDto) {
-    const events = await this.eventsService.listEvents(query);
-    return { events };
+    const response = await this.eventsService.listEvents(query);
+    return response;
   }
 }
