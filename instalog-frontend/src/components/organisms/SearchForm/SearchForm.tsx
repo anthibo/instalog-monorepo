@@ -1,27 +1,52 @@
 'use client'
 
-import React from 'react'
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from 'react'
+import { TfiExport } from 'react-icons/tfi'
+import { GoPrimitiveDot } from 'react-icons/go'
+
+import { Button } from 'flowbite-react';
 
 
-function LiveViewToggle() {
+function SearchFormButtonsGroup() {
     return (
-        <button className='absolute right-2.5 bottom-2.5 bg-gray-600 p-3 rounded'>
-            <span className="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span className="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>Visitors</span>
-        </button>
+        <Button.Group className='w-full'>
+            <Button color="gray" className='text-sm px-1' >
+                Export
+                <TfiExport className='ml-2 mb-0.5' />
+            </Button>
+            <Button color="gray" className='px-1'>
+                Live
+                <GoPrimitiveDot className='text-red-900' size={20} />
+            </Button>
+        </Button.Group>
     )
 }
-export default function SearchForm() {
+
+export type SearchFormProps = {
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function SearchForm({ setSearchTerm }: SearchFormProps) {
+    const [currentInput, setCurrentInput] = useState('')
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setSearchTerm(currentInput)
+        }, 500)
+        return () => clearTimeout(timer)
+    }, [currentInput])
+
     return (
-        <form>
-            <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </div>
-                <input type="search" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
-                <LiveViewToggle />
-                {/* <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button> */}
+        <div className="grid grid-cols-12 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-3">
+            <div className='col-span-9'>
+                <input type="search" className="w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2.5"
+                    placeholder="Search name, email or action..." required
+                    onChange={e => setCurrentInput(e.target.value)}
+                />
             </div>
-        </form>
+            <div className='col-span-3'>
+                <SearchFormButtonsGroup />
+            </div>
+        </div>
     )
 }

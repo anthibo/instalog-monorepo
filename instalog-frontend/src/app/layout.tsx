@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang={config.locale}>
       <body>
-        <div className='p-10'>
+        <div className='px-10 py-10'>
           <ClientProvidersWrapper>
             {children}
           </ClientProvidersWrapper>
