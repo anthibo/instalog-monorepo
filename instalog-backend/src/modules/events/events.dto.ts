@@ -37,4 +37,6 @@ export class EventQueryParamsDto {
   target_id?: string;
 
   occurred_after?: string;
+
+  search?: string;
 }

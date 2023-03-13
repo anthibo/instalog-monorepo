@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -28,10 +29,14 @@ model Actor {
   hashed_password String
   sdk_secret_key  String?
   events          Event[]
+
+  @@fulltext([name, email])
 }
 
 model Action {
   id     String  @id @default(uuid())
   name   String  @unique
   events Event[]
+
+  @@fulltext([name])
 }

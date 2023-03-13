@@ -64,6 +64,7 @@ export class EventsService {
     action_name,
     occurred_after,
     target_id,
+    search,
   }: EventQueryParamsDto): Prisma.EventFindManyArgs {
     const eventQueryBuilder = new EventQueryBuilder(Number(batchSize));
     return eventQueryBuilder
@@ -72,6 +73,7 @@ export class EventsService {
       .action_name(action_name)
       .occurred_after(occurred_after)
       .target_id(target_id)
+      .search(search)
       .build();
   }
 }
@@ -115,6 +117,38 @@ class EventQueryBuilder {
     }
     return this;
   }
+
+  search(search: string) {
+    if (search) {
+      this.returnedQuery['where'] = {
+        OR: [
+          {
+            action: {
+              name: {
+                contains: search,
+              },
+            },
+          },
+          {
+            actor: {
+              email: {
+                contains: search,
+              },
+            },
+          },
+          {
+            actor: {
+              name: {
+                contains: search,
+              },
+            },
+          },
+        ],
+      };
+    }
+    return this;
+  }
+
   build(): Prisma.EventFindManyArgs {
     console.log(this.returnedQuery);
     return this.returnedQuery;
