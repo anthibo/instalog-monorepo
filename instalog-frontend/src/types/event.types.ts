@@ -15,11 +15,12 @@ export type Event = {
     action: Action,
 }
 
-export type EventFilterParams = {
-    actor_id: string;
-    action_id: string;
-    action_name: string;
-    target_id: string;
+export type EventQueryParams = {
+    actor_id?: string;
+    action_id?: string;
+    action_name?: string;
+    target_id?: string;
+    search?: string
 }
 
 export type FetchEventsResponse = {
