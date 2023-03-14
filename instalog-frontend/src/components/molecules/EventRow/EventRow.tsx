@@ -1,18 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
+
+import { Button } from 'flowbite-react'
+import { CgArrowsExpandRight } from 'react-icons/cg'
+import moment from 'moment';
+
 
 import ActorAvatar from '@/components/atoms/ActorAvatar/ActorAvatar'
 import { Event } from '@/types/event.types'
 import EventDetailsTooltip from '@/components/atoms/EventDetailsTooltip/EventDetailsTooltip'
 import EventDetailsAccordion from '@/components/atoms/EventDetailsAccordion/EventDetailsAccordion'
+import EventDetailsModal from '@/components/atoms/EventDetailsModal/EventDetailsModal'
+
 
 type EventRowProps = {
     event: Event
 }
-// TODO: FORMAT DATE
-// TODO: Show event details on hover
+
 export default function EventRow({ event }: EventRowProps) {
+    const [showDetailsModal, setShowDetailsModal] = useState(false)
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id={event.id}>
             <td className="px-6 py-4 font-medium text-gray-900">
@@ -22,13 +29,15 @@ export default function EventRow({ event }: EventRowProps) {
             <td className="px-6 py-4 font-medium text-gray-900">
                 {event.action.name}
             </td>
-            {/* Aug 7, 2:22 PM */} {/* M D, Time */}
             <td className="px-6 py-4 font-medium text-gray-900">
-                {/* use moment js here */}
-                {new Date(event.occurred_at).toString()}
+                {moment(event.occurred_at).format('LLL')}
             </td>
-            <EventDetailsTooltip event={event} />
-            {/* <EventDetailsAccordion event={event}/> */}
+            <td>
+                <Button onClick={() => setShowDetailsModal(true)} color='light'>
+                    Show details <CgArrowsExpandRight className='ml-2'/>
+                </Button>
+            </td>
+            <EventDetailsModal event={event} showModal={showDetailsModal} setShowModal={setShowDetailsModal} />
         </tr>
     )
 }

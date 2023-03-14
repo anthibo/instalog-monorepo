@@ -13,6 +13,9 @@ export default function EventTableColumns() {
                 <th scope="col" className="px-6 py-3">
                     Date
                 </th>
+                <th scope="col" className="px-6 py-3">
+                    
+                </th>
             </tr>
         </thead>
     )

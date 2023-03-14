@@ -34,7 +34,7 @@ export default function EventsTableRows({ data, setSize, shouldLoadMore, size }:
             ))}
 
             <tr>
-                <td colSpan={3}>
+                <td colSpan={4}>
                     {
                         shouldLoadMore &&
                         (
