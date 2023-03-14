@@ -1,21 +1,37 @@
 import {
+  ConnectedSocket,
+  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  SubscribeMessage,
   WebSocketGateway,
+  WebSocketServer,
 } from '@nestjs/websockets';
+import { Server } from 'http';
+import { Socket } from 'socket.io';
 // import {  } from '@nestjs/platform-socket.io';
 
 @WebSocketGateway(80, { namespace: 'events' })
 export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  handleDisconnect(client: any) {
-    throw new Error('Method not implemented.');
+  @WebSocketServer()
+  public server: Server;
+  handleDisconnect(@ConnectedSocket() client: Socket) {}
+
+  handleConnection(client: Socket) {
+    console.log(client);
   }
-  handleConnection(client: any) {
-    console.log(client.handshake.auth);
-    const username = client.handshake.auth.username;
-    const userInboxRoom = `${username}-inbox`;
-    client.join(userInboxRoom);
-    console.log(`${username} is online`);
-    return { event: 'roomCreated', room: userInboxRoom };
+
+  @SubscribeMessage('enable live')
+  handleEnableLive(@ConnectedSocket() client: Socket) {
+    client.join('live');
+  }
+
+  @SubscribeMessage('enable live with search')
+  handleEnableLiveWithSearch(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() search: string,
+  ) {
+    client.join(`live  ${search}`);
+    // should emit an event to events.service
   }
 }
