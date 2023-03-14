@@ -27,7 +27,7 @@ model Actor {
   email           String @unique
   name            String
   hashed_password String
-  sdk_secret_key  String?
+  sdk_secret_key  String? @unique
   events          Event[]
 
   @@fulltext([name, email])

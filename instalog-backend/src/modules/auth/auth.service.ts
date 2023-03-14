@@ -81,4 +81,9 @@ export class AuthService {
     await this.actorService.updateActor({ id: actorId }, { sdk_secret_key });
     return { sdk_secret_key };
   }
+
+  async validateSecretKey(secretKey: string) {
+    const user = await this.actorService.findOne({ sdk_secret_key: secretKey });
+    return user;
+  }
 }

@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ActorsModule } from '../actors/actors.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import { SecretKeyStrategy } from './strategies/secret-key.strategy';
 
 @Module({
   imports: [
@@ -25,6 +26,6 @@ import { LocalStrategy } from './strategies/local.strategy';
     ActorsModule,
   ],
   controllers: [AuthController],
-  providers: [LocalStrategy, JwtStrategy, AuthService],
+  providers: [LocalStrategy, JwtStrategy, AuthService, SecretKeyStrategy],
 })
 export class AuthModule {}
