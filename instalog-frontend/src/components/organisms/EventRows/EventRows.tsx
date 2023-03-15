@@ -41,7 +41,7 @@ export default function EventsTableRows({ data, setSize, shouldLoadMore, size }:
                             <div className='mt-3 w-full'>
                                 <Button
                                     color="light"
-                                    className='w-full text-center bg-gray-500 text-gray-600'
+                                    className='w-full text-center bg-gray-500 text-gray-600 active:border-gray-100'
                                     onClick={() => setSize(size + 1)}
                                 >
                                     Load More...

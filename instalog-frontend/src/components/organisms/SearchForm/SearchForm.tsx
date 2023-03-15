@@ -1,20 +1,18 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { TfiExport } from 'react-icons/tfi'
-import { GoPrimitiveDot } from 'react-icons/go'
 
 import SearchForm from '@/components/molecules/SearchForm/SearchForm';
 import { FetchEventsResponse } from '@/types/event.types';
-import SearchButtonsGroup from '../SearchButtonsGroup/SearchButtonsGroup';
+import SearchButtonsGroup from '../../molecules/SearchButtonsGroup/SearchButtonsGroup';
 
 
-type SearchFormProps = {
+type SearchGroupProps = {
     setSearchTerm: React.Dispatch<React.SetStateAction<string>>
     data: FetchEventsResponse[] | undefined;
 }
 
-export default function SearchGroup({ setSearchTerm, data }: SearchFormProps) {
+export default function SearchGroup({ setSearchTerm, data }: SearchGroupProps) {
     const [currentInput, setCurrentInput] = useState('')
 
     useEffect(() => {
@@ -25,9 +23,9 @@ export default function SearchGroup({ setSearchTerm, data }: SearchFormProps) {
     }, [currentInput])
 
     return (
-        <div className="grid grid-cols-12 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-3">
+        <div className="grid grid-cols-12 text-gray-700 uppercase bg-gray-50  dark:text-gray-400 p-2">
             <SearchForm setCurrentInput={setCurrentInput} />
-            <div className='col-span-3'>
+            <div className='col-span-2'>
                 <SearchButtonsGroup data={data} />
             </div>
         </div>

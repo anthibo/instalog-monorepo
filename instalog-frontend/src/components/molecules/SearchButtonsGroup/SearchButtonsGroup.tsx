@@ -17,7 +17,6 @@ const prepareDataToCSV = (fetchData: FetchEventsResponse[] | undefined) => {
         return { data: [] }
     }
     const data = fetchData.flatMap(fetchEventData => fetchEventData.events).flat()
-    console.log(data);
     return { data }
 }
 
@@ -39,7 +38,6 @@ export default function SearchButtonsGroup({ data: fetchData }: SearchButtonsGro
         const { data } = prepareDataToCSV(fetchData)
         setPreparedData(data)
     }, [fetchData])
-    console.log(preparedData)
     return (
         <Button.Group className='w-full'>
             <CSVLink data={preparedData} headers={headers} filename="events">
