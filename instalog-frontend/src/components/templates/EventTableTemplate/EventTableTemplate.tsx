@@ -8,14 +8,14 @@ import { EventQueryParams, FetchEventsResponse } from '@/types/event.types';
 
 import EventsTableRows from '@/components/organisms/EventRows/EventRows';
 import EventTableColumns from '@/components/organisms/EventTableColumns/EventTableColumns';
-import SearchForm from '@/components/organisms/SearchForm/SearchForm';
+import SearchGroup from '@/components/organisms/SearchForm/SearchForm';
 
 
 
 export default function EventTableTemplate() {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [shouldLoadMore, setShouldLoadMore] = useState(false)
-    
+
     const eventParams: EventQueryParams = {
         search: searchTerm,
         // we add the rest of query params here (If I implemented api filtering for FE, I will remove this comment :D)
@@ -33,11 +33,11 @@ export default function EventTableTemplate() {
 
     return (
         <div className="relative overflow-x-auto">
-            <SearchForm setSearchTerm={setSearchTerm}/>
+            <SearchGroup setSearchTerm={setSearchTerm} data={data} />
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <EventTableColumns />
                 <tbody>
-                    <EventsTableRows data={data} setSize={setSize} size={size} shouldLoadMore={shouldLoadMore}/>
+                    <EventsTableRows data={data} setSize={setSize} size={size} shouldLoadMore={shouldLoadMore} />
                 </tbody>
             </table>
         </div>
